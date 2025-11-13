@@ -620,6 +620,12 @@ let createAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
 			[Item.of(`tfc:food/${grain}_flour`), Fluid.of('minecraft:water', 100)],
 			250)
 	})
+    event.recipes.create.mixing([Fluid.of('gregitas:iced_pina_colada', 250)], [Fluid.of('firmalife:pina_colada', 250), 'gregitas:crushed_frostburn'], 10)
+    TFCGrains.forEach((grain) => {
+    event.recipes.create.mixing([`firmalife:food/${grain}_dough`],
+         [Item.of(`tfc:food/${grain}_flour`), Fluid.of('firmalife:yeast_starter', 250), Item.of('#tfc:sweetener')], 
+         250, 
+         'heated')})
 
     let addMoldChiselDeploying = (resultItem, moldItem, breakChance, fluidIngredientId, fluidAmount) => {
         let resultMold = (breakChance != 1) ? Item.of(moldItem).withChance(1 - breakChance) : 0;
