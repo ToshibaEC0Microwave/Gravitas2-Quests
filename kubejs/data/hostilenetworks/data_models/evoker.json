@@ -11,11 +11,11 @@
     "sim_cost": 8192,
     "input": {
         "item": "hostilenetworks:prediction_matrix",
-        "count": 1
+        "count": 4
     },
     "base_drop": {
         "item": "tfc:gem/emerald",
-        "count": 1
+        "count": 4
     },
     "trivia": "hostilenetworks.trivia.evoker",
     "fabricator_drops": [

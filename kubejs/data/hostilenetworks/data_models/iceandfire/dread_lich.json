@@ -17,7 +17,7 @@
     "sim_cost": 2048,
     "input": {
         "item": "hostilenetworks:prediction_matrix",
-        "count": 1
+        "count": 4
     },
     "base_drop": {
         "item": "minecraft:bone",
@@ -27,7 +27,7 @@
     "fabricator_drops": [
         {
             "item": "iceandfire:dread_shard",
-            "count": 1
+            "count": 2
         },
         {
             "item": "iceandfire:dread_key",
