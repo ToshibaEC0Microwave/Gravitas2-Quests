@@ -89,19 +89,9 @@ let recipeRemoval = (/** @type {Internal.RecipesEventJS} */ event) => {
   event.remove({ id: "hostilenetworks:deep_learner"})
   event.remove({ id: "hostilenetworks:framework" })
 
-  event.remove({ id: "hostilenetworks:living_matter/overworldian/rotten_flesh"})
-  event.remove({ id: "hostilenetworks:living_matter/overworldian/carrot"})
-  event.remove({ id: "hostilenetworks:living_matter/overworldian/gunpowder"})
-  event.remove({ id: "hostilenetworks:living_matter/overworldian/bone"})
-  event.remove({ id: "hostilenetworks:living_matter/overworldian/potato"})
-  event.remove({ id: "hostilenetworks:living_matter/overworldian/grass"})
-
-  event.remove({ id: "hostilenetworks:living_matter/hellish/nether_wart"})
-  event.remove({ id: "hostilenetworks:living_matter/hellish/soul_sand"})
-  event.remove({ id: "hostilenetworks:living_matter/hellish/ghast_tear"})
-
-  event.remove({ id: "hostilenetworks:living_matter/extraterrestrial/end_stone"})
-  event.remove({ id: "hostilenetworks:living_matter/extraterrestrial/chorus_fruit"})
+  event.remove({ input: "hostilenetworks:overworld_prediction"})
+  event.remove({ input: "hostilenetworks:nether_prediction"})
+  event.remove({ input: "hostilenetworks:end_prediction"})
 
   //GT / Railcraft Tool Specific
   toolsToRemove.forEach((tool) => {
