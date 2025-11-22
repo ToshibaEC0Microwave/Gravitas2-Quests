@@ -23,17 +23,5 @@
             "item": "minecraft:blaze_rod",
             "count": 4
         }
-    ],
-    "tier_data": [
-        12,
-        108,
-        708,
-        1254
-    ],
-    "data_per_kill": [
-        1,
-        4,
-        10,
-        18
     ]
 }

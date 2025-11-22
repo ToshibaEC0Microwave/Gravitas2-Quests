@@ -37,17 +37,5 @@
             "item": "iceandfire:sea_serpent_fang",
             "count": 1
         }
-    ],
-    "tier_data": [
-        6,
-        54,
-        354,
-        1254
-    ],
-    "data_per_kill": [
-        1,
-        4,
-        10,
-        18
     ]
 }
