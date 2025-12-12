@@ -2677,6 +2677,70 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
     .duration(200)
     .EUt(20)
 
+
+  // Nuclearcraft Recipes
+
+  // Fission
+  event.recipes.gtceu.mixer("gregitas:fission_reactor_casing")
+    .itemInputs("gtceu:steel_frame", "6x gtceu:lead_plate", "6x gtceu:steel_plate")
+    .inputFluids(Fluid.of("gtceu:concrete", 288))
+    .itemOutputs("nuclearcraft:fission_reactor_casing")
+    .duration(600)
+    .EUt(MV * 0.75)
+  
+  event.recipes.gtceu.assembler("gregitas:fission_reactor_controller")
+    .itemInputs("2x #gtceu:circuits/hv", "4x nuclearcraft:fission_reactor_casing", "4x gtceu:steel_plate")
+    .itemOutputs("nuclearcraft:fission_reactor_controller")
+    .duration(1200)
+    .EUt(HV * 0.5)
+
+  event.recipes.gtceu.mixer("gregitas:fission_reactor_empty_heatsink")
+    .itemInputs("2x gtceu:kanthal_plate", "4x gtceu:steel_plate", "minecraft:bucket")
+    .inputFluids(Fluid.of("gtceu:concrete", 144))
+    .itemOutputs("nuclearcraft:reactor_empty_heatsink")
+    .duration(400)
+    .EUt(MV * 0.5)
+  
+  event.recipes.gtceu.assembler("gregitas:fission_reactor_port")
+    .itemInputs("2x gtceu:mv_robot_arm", "4x gtceu:stainless_steel_plate", "gtceu:steel_frame")
+    .itemOutputs("nuclearcraft:fission_reactor_port")
+    .duration(800)
+    .EUt(HV * 0.35)
+  
+  event.recipes.gtceu.canner("gregitas:reactor_solid_fuel")
+    .itemInputs("gtceu:stainless_steel_fluid_cell")
+    .inputFluids(Fluid.of("gtceu:lead", 576))
+    .itemOutputs("nuclearcraft:fission_reactor_solid_fuel_cell")
+    .duration(200)
+    .EUt(MV)
+
+  // Fusion
+  event.recipes.gtceu.mixer("gregitas:fusion_reactor_casing")
+    .itemInputs("gtceu:stainless_steel_frame", "6x gtceu:lead_plate", "6x gtceu:stainless_steel_plate")
+    .inputFluids(Fluid.of("gtceu:concrete", 288))
+    .itemOutputs("nuclearcraft:fusion_reactor_casing")
+    .duration(800)
+    .EUt(HV)
+
+  event.recipes.gtceu.assembler("gregitas:basic_electromagnet")
+    .itemInputs("32x gtceu:fine_tantalum_wire", "gtceu:steel_hex_wire")
+    .inputFluids(Fluid.of("gtceu:glue", 144))
+    .itemOutputs("nuclearcraft:basic_electromagnet")
+    .duration(600)
+    .EUt(HV)
+  
+  event.recipes.gtceu.assembler("gregitas:basic_rf_amplifier")
+    .itemInputs("6x gtceu:copper_plate", "2x gtceu:stainless_steel_plate", "#gtceu:inductors")
+    .itemOutputs("nuclearcraft:basic_rf_amplifier")
+    .duration(400)
+    .EUt(HV * 0.5)
+
+  event.recipes.gtceu.assembler("fusion_reactor_connector")
+    .itemInputs("gtceu:stainless_steel_frame", "6x gtceu:lead_plate", "#gtceu:circuits/mv")
+    .itemOutputs("nuclearcraft:fusion_reactor_connector")
+    .duration(800)
+    .EUt(HV * 0.75)
+
   //Sophisticated Backpacks
   shaped("sophisticatedbackpacks:tool_swapper_upgrade", ["BFB", "CGD", "AEA"], {
     A: "#forge:ingots/iron",
