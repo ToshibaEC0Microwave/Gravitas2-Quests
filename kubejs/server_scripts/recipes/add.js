@@ -35,7 +35,6 @@ const TFCFlowers = [
   "dandelion",
   "desert_flame",
   "foxglove",
-  "hyacinth",
   "guzmania",
   "hibiscus",
   "kangaroo_paw",
@@ -205,6 +204,21 @@ const jams = [
 const dyes = [
   "white",
   "light_gray",
+  "brown",
+  "orange",
+  "red",
+  "yellow",
+  "green",
+  "lime",
+  "blue",
+  "light_blue",
+  "pink",
+  "magenta",
+  "purple"
+]
+const FluidDyes = [
+  "white",
+  "light_gray",
   "gray",
   "black",
   "brown",
@@ -220,7 +234,6 @@ const dyes = [
   "purple",
   "cyan"
 ]
-
 const tfcStone = [
   "granite",
   "diorite",
@@ -1165,18 +1178,7 @@ let recipeAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
   event.shapeless("computercraft:wireless_modem_normal", ["computercraft:wired_modem", "minecraft:ender_pearl"])
   event.shapeless("computercraft:wireless_modem_advanced", ["computercraft:wireless_modem_normal", "minecraft:ender_eye"])
   
-  //Rock and Stone!
-  tfcStone.forEach((stone) => {
-    event.recipes.gtceu
-      .rock_breaker(`loose_${stone}`)
-      .notConsumable(`tfc:rock/raw/${stone}`)
-      .itemOutputs(`tfc:rock/raw/${stone}`)
-      .duration(16)
-      .EUt(LV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "minecraft:water")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
+
   //Railcraft Start
   shaped("railcraft:solid_fueled_firebox", ["BBB", "BCB", "BFB"], {
     B: "minecraft:brick",
@@ -2179,29 +2181,9 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
     T: "minecraft:redstone_torch"
   })
 
-  //tfc jams
+  
 
-  jams.forEach((jams) => {
-    event.recipes.gtceu
-      .mixer(`gregitas:mixer_jam_${jams}`)
-      .itemInputs(`4x tfc:empty_jar_with_lid`)
-      .itemInputs(
-        Ingredient.of(
-          {
-            type: "tfc:not_rotten",
-            ingredient: {
-              item: `tfc:food/${jams}`
-            }
-          },
-          4
-        )
-      )
-      .itemInputs(`#firmalife:sweetener`)
-      .inputFluids(Fluid.of("minecraft:water", 500))
-      .itemOutputs(`4x tfc:jar/${jams}`)
-      .duration(40)
-      .EUt(LV)
-  })
+  
   // Iced drinks
   event.recipes.gtceu
   .mixer("gregitas:iced_pina_colada")
@@ -2223,6 +2205,24 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
     .duration(20)
     .EUt(LV)
 })
+
+event.recipes.create.crushing([`2x minecraft:gray_dye`], `gtceu:stone_dust`, 250)
+
+  event.recipes.gtceu
+    .macerator(`gregitas:macerator_tfc_gray_dye`)
+    .itemInputs(`gtceu:stone_dust`)
+    .itemOutputs(`2x minecraft:gray_dye`)
+    .duration(20)
+    .EUt(LV)
+
+  event.recipes.create.crushing([`2x minecraft:black_dye`], `minecraft:ink_sac`, 250)
+
+  event.recipes.gtceu
+    .macerator(`gregitas:macerator_tfc_black_dye`)
+    .itemInputs(`minecraft:ink_sac`)
+    .itemOutputs(`2x minecraft:black_dye`)
+    .duration(20)
+    .EUt(LV)
   //tfc liquid dyes
 
   dyes.forEach((dyes) => {
@@ -2237,7 +2237,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
 
   //alabaster
 
-  dyes.forEach((dyes) => {
+  FluidDyes.forEach((dyes) => {
     event.recipes.gtceu
       .mixer(`gregitas:mixer_tfc_${dyes}_alabaster`)
       .itemInputs(`tfc:alabaster/raw`)
@@ -2247,7 +2247,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
       .EUt(LV)
   })
 
-  dyes.forEach((dyes) => {
+  FluidDyes.forEach((dyes) => {
     event.recipes.gtceu
       .mixer(`gregitas:mixer_tfc_${dyes}_alabaster_bricks`)
       .itemInputs(`tfc:alabaster/bricks`)
@@ -2265,7 +2265,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
     .duration(20)
     .EUt(LV)
 
-  dyes.forEach((dyes) => {
+  FluidDyes.forEach((dyes) => {
     event.recipes.gtceu
       .mixer(`gregitas:mixer_tfc_${dyes}_alabaster_polished`)
       .itemInputs(`tfc:alabaster/polished`)
@@ -2297,77 +2297,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
 
   //create stones
 
-  createstone.forEach((createstone) => {
-    event.recipes.gtceu
-      .rock_breaker(`raw_${createstone}`)
-      .notConsumable(`create:${createstone}`)
-      .itemOutputs(`create:${createstone}`)
-      .duration(16)
-      .EUt(MV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "minecraft:water")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
-
-  createstonec.forEach((createstonec) => {
-    event.recipes.gtceu
-      .rock_breaker(`raw_${createstonec}`)
-      .notConsumable(`create:${createstonec}`)
-      .itemOutputs(`create:${createstonec}`)
-      .duration(16)
-      .EUt(MV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "firmalife:chocolate")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
-
-  createstoneh.forEach((createstoneh) => {
-    event.recipes.gtceu
-      .rock_breaker(`raw_${createstoneh}`)
-      .notConsumable(`create:${createstoneh}`)
-      .itemOutputs(`create:${createstoneh}`)
-      .duration(16)
-      .EUt(MV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "create:honey")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
-
-  createstoneh.forEach((createstoneh) => {
-    event.recipes.gtceu
-      .rock_breaker(`minecraft:dripstone_block`)
-      .notConsumable(`minecraft:dripstone_block`)
-      .itemOutputs(`minecraft:dripstone_block`)
-      .duration(16)
-      .EUt(MV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "minecraft:water")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
-
-  createstonecut.forEach((createstonecut) => {
-    event.recipes.gtceu
-      .rock_breaker(`cut_${createstonecut}`)
-      .notConsumable(`create:cut_${createstonecut}`)
-      .itemOutputs(`create:cut_${createstonecut}`)
-      .duration(16)
-      .EUt(MV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "minecraft:water")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
-
-  createstonevanilla.forEach((createstonevanilla) => {
-    event.recipes.gtceu
-      .rock_breaker(`raw_${createstonevanilla}`)
-      .notConsumable(`minecraft:${createstonevanilla}`)
-      .itemOutputs(`minecraft:${createstonevanilla}`)
-      .duration(16)
-      .EUt(MV)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "minecraft:water")
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
+  
 
   //gregtech circuits
 
@@ -2697,7 +2627,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
   event.recipes.gtceu.mixer("gregitas:fission_reactor_empty_heatsink")
     .itemInputs("2x gtceu:kanthal_plate", "4x gtceu:steel_plate", "minecraft:bucket")
     .inputFluids(Fluid.of("gtceu:concrete", 144))
-    .itemOutputs("nuclearcraft:reactor_empty_heatsink")
+    .itemOutputs("nuclearcraft:empty_heat_sink")
     .duration(400)
     .EUt(MV * 0.5)
   
@@ -2900,7 +2830,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
 
     event.recipes.gtceu
     .assembler("gregitas:landing_gear")
-    .itemInputs("4x gtceu:stainless_steel_screw", "2x gtceu:steel_minecart_wheels", "3x gtceu:aluminium_rod", "2x gtceu:rubber_sheet")
+    .itemInputs("4x gtceu:stainless_steel_screw", "2x gtceu:steel_minecart_wheels", "3x gtceu:aluminium_rod", "2x gtceu:rubber_plate")
     .inputFluids(Fluid.of("gtceu:soldering_alloy", 100))
     .itemOutputs("immersive_aircraft:improved_landing_gear")
     .duration(260)
@@ -2908,7 +2838,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
 
     event.recipes.gtceu
     .assembler("gregitas:hull_reinforcement")
-    .itemInputs("3x immersive_aircraft:hull", "6x gtceu:stainless_steel_plate", "32x gtceu:stainless_steel_screw", "2x gtceu:rubber_sheet")
+    .itemInputs("3x immersive_aircraft:hull", "6x gtceu:stainless_steel_plate", "32x gtceu:stainless_steel_screw", "2x gtceu:rubber_plate")
     .inputFluids(Fluid.of("gtceu:soldering_alloy", 100))
     .itemOutputs("immersive_aircraft:hull_reinforcement")
     .duration(260)
@@ -2916,7 +2846,7 @@ event.stonecutting("2x railways:riveted_locometal", "minecraft:iron_ingot")
 
     event.recipes.gtceu
     .assembler("gregitas:gyroscope")
-    .itemInputs("3x minecraft:redstone_comparator", "firmaciv:firmaciv_compass", "firmaciv:nav_clock", "firmaciv:sextant", "2x gtceu:aluminium_plate")
+    .itemInputs("3x minecraft:comparator", "firmaciv:firmaciv_compass", "firmaciv:nav_clock", "firmaciv:sextant", "2x gtceu:aluminium_plate")
     .inputFluids(Fluid.of("gtceu:soldering_alloy", 200))
     .itemOutputs("immersive_aircraft:gyroscope")
     .duration(220)

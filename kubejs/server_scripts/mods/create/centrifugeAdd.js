@@ -24,9 +24,10 @@ let centrifugeAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
 
     // Vintage Improvements centrifuge has no lid - all gas outputs will be lost
     const gas_blacklist = ['gtceu:methane', 'gtceu:oxygen', 'gtceu:hydrogen', 'gtceu:lpg', 'gtceu:helium']
-    
+    var wedone = false
     // Import some Gregtech centrifuging recipes to Vintage Improvements centrifuge
     event.forEachRecipe({ mod: 'gtceu', type: 'gtceu:centrifuge'}, (recipe) => {
+        if (wedone == true) { return }
         // UGLY HACKS are used here to wrangle Gregtech recipes
         let recipe_json = JSON.parse(recipe.json)
         
@@ -59,7 +60,7 @@ let centrifugeAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
         original_output_fluids = original_output_fluids.filter((f) => !gas_blacklist.includes(f.content.value[0].fluid))
         
         // Exclude recipes that have no output remaining after gases are removed
-        if (!original_output_items.length && !original_output_fluids.length) {
+        if (!original_output_items.length) {
             return
         }
                 
@@ -73,20 +74,35 @@ let centrifugeAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
         let results = []
         for (let i = 0; i < original_output_items.length; i++) {
             let output = original_output_items[i] 
-            results.push(Item.of(output.content.ingredient.item, output.content.count).withChance(output.chance / 10000))
+            let outFluid = original_output_fluids[i]    
+            if (wedone == true) { return }
+            
+            console.log("RECIPE CHECK " + String(recipe.id))
+            if (String(recipe.id).includes("netherrack") ) { break }
+            if (String(recipe.id).includes("oilsands") ) { break }
+            if (String(recipe.id).includes("endstone") ) { break }
+            if (String(recipe.id).includes("rare_earth") ) { break }
+            if (String(recipe.id).includes("ash_separation") ){ break }
+            if (String(recipe.id).includes("quartz_sand") ){ break }
+            if (String(recipe.id).includes("grass_block") ){ break } 
+            if (String(recipe.id).includes("mycelium") ){ break }    
+            if (String(recipe.id).includes("dirt") ){ break } 
+            if (String(recipe.id).includes("spessartine") ){ break } 
+            console.log("CHECKLIST " + output.content.ingredient.item + " " + output.content.count + " ")
+            console.log(JSON.stringify(output))
+
+            results.push(Item.of(output.content.ingredient.item, output.count).withChance(output.chance / 10000))
+            
         }
+        if (wedone == true) { return }
         
-        for (let i = 0; i < original_output_fluids.length; i++) {
-            let output = original_output_fluids[i]
-            results.push(Fluid.of(output.content.value[0].fluid, output.content.amount))
-        }
-        
+       
         // Runs fast, but needs to be stopped for loading and unloading - clunky to use
         let duration = recipe_json.duration / 2
         
         // 64 RPM (128 SU) for ULV, 128 RPM (256 SU) for LV
         let rpm = eu_cost > 8 ? 128 : 64
         
-        event.recipes.vintage.centrifugation(results, ingredients, duration).minimalRPM(rpm)
+       event.recipes.vintage.centrifugation(results, ingredients, duration).minimalRPM(rpm)
     })
 }

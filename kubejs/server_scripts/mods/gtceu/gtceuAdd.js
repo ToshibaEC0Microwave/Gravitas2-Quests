@@ -406,7 +406,7 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
     if (index >= 14) {
       return
     }
-    let glass = $CraftingComponent.GLASS.getIngredient(index)
+    let glass = $CraftingComponents.GLASS
     if (glass instanceof $TagKey) {
       glass = "#" + glass.location().toString()
     }
@@ -449,7 +449,7 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
         C: `#gtceu:circuits/${tier_name.toLowerCase()}`,
         P: `gtceu:${tier_name.toLowerCase()}_pump`,
         H: `gtceu:${tier_name.toLowerCase()}_machine_hull`,
-        F: $CraftingComponent.VOLTAGE_COIL.getIngredient(index)
+        F: $CraftingComponents.VOLTAGE_COIL
       })
     }
   })
@@ -477,18 +477,7 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
   // Rock breaker recipes
   const tfcRockbreakerCobbles = tfcCobbleToSand.map((t) => t.stone).concat(["quartzite"])
 
-  tfcRockbreakerCobbles.forEach((type) => {
-    event.recipes.gtceu
-      .rock_breaker(`rock/cobble/${type}`)
-      .notConsumable(`tfc:rock/cobble/${type}`)
-      .itemOutputs(`tfc:rock/cobble/${type}`)
-      .addDataString("fluidA", "minecraft:lava")
-      .addDataString("fluidB", "minecraft:water")
-      .duration(16)
-      .EUt(24)
-      .addCondition(RockBreakerCondition.INSTANCE)
-  })
-
+  
   //Modification
   event.replaceInput({ mod: "gtceu" }, "minecraft:sand", "#forge:sand")
   event.replaceInput({ mod: "gtceu" }, "minecraft:red_sand", "#forge:sand")
@@ -839,178 +828,8 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
       .duration(300)
   })
 
-  //yeast starter
 
-  event.recipes.gtceu
-    .fermenter("yeast_starter_create")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "tfc:foods/fruits"
-          }
-        },
-        1
-      )
-    )
-    .inputFluids(Fluid.of("minecraft:water", 100))
-    .outputFluids(Fluid.of("firmalife:yeast_starter", 100))
-    .EUt(LV)
-    .duration(2000)
 
-  event.recipes.gtceu
-    .fermenter("yeast_starter_duplicate")
-    .itemInputs(
-      InputItem.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "firmalife:feeds_yeast"
-          }
-        },
-        1
-      )
-    )
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 100))
-    .outputFluids(Fluid.of("firmalife:yeast_starter", 500))
-    .EUt(LV)
-    .duration(200)
-
-  //dough
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_oat_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/oat_flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("#tfc:sweetener")
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 1000))
-    .itemOutputs("4x firmalife:food/oat_dough")
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_wheat_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/wheat_flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("#tfc:sweetener")
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 1000))
-    .itemOutputs("4x firmalife:food/wheat_dough")
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_barley_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/barley_flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("#tfc:sweetener")
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 1000))
-    .itemOutputs("4x firmalife:food/barley_dough")
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_maize_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/maize_flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("#tfc:sweetener")
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 1000))
-    .itemOutputs("4x firmalife:food/maize_dough")
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_rice_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/rice_flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("#tfc:sweetener")
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 1000))
-    .itemOutputs("4x firmalife:food/rice_dough")
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_rye_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/rye_flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("#tfc:sweetener")
-    .inputFluids(Fluid.of("firmalife:yeast_starter", 1000))
-    .itemOutputs("4x firmalife:food/rye_dough")
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .mixer("gt_mixer_hardtack_dough")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "tfc:foods/flour"
-          }
-        },
-        1
-      )
-    )
-    .itemInputs("tfc:powder/salt")
-    .inputFluids(Fluid.of("minecraft:water", 1000))
-    .itemOutputs("4x firmalife:food/hardtack_dough")
-    .EUt(LV)
-    .duration(50)
 
   //limewater
 
@@ -1106,17 +925,6 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
     .duration(100)
     .EUt(8)
 
-  //deepslate
-
-  event.recipes.gtceu
-    .rock_breaker("chep_deepslate")
-    .notConsumable("minecraft:deepslate")
-    .itemOutputs("minecraft:deepslate")
-    .addDataString("fluidA", "minecraft:lava")
-    .addDataString("fluidB", "minecraft:water")
-    .duration(16)
-    .EUt(24)
-    .addCondition(RockBreakerCondition.INSTANCE)
 
   //alabaster brick
 
@@ -1172,79 +980,9 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
     .EUt(LV)
     .duration(100)
 
-  //vinegar
+  
 
-  event.recipes.gtceu
-    .fermenter("vinegar_from_beer")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "tfc:foods/fruits"
-          }
-        },
-        1
-      )
-    )
-    .inputFluids(Fluid.of("tfc:beer", 250))
-    .outputFluids(Fluid.of("tfc:vinegar", 250))
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .fermenter("vinegar_from_rum")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "tfc:foods/fruits"
-          }
-        },
-        1
-      )
-    )
-    .inputFluids(Fluid.of("tfc:rum", 250))
-    .outputFluids(Fluid.of("tfc:vinegar", 250))
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .fermenter("vinegar_from_whiskey")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "tfc:foods/fruits"
-          }
-        },
-        1
-      )
-    )
-    .inputFluids(Fluid.of("tfc:whiskey", 250))
-    .outputFluids(Fluid.of("tfc:vinegar", 250))
-    .EUt(LV)
-    .duration(50)
-
-  event.recipes.gtceu
-    .fermenter("vinegar_from_vodka")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            tag: "tfc:foods/fruits"
-          }
-        },
-        1
-      )
-    )
-    .inputFluids(Fluid.of("tfc:vodka", 250))
-    .outputFluids(Fluid.of("tfc:vinegar", 250))
-    .EUt(LV)
-    .duration(50)
+  
 
   //curdled milk
 
@@ -1339,23 +1077,6 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
     .duration(75)
 
   //olive oil
-
-  event.recipes.gtceu
-    .forge_hammer("olive_crushing")
-    .itemInputs(
-      Ingredient.of(
-        {
-          type: "tfc:not_rotten",
-          ingredient: {
-            item: "tfc:food/olive"
-          }
-        },
-        1
-      )
-    )
-    .itemOutputs("2x tfc:olive_paste")
-    .EUt(LV)
-    .duration(50)
 
   event.recipes.gtceu
     .fluid_heater("olive_oil_water")
@@ -1456,10 +1177,10 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
     .EUt(MV)
 
   event.recipes.gtceu
-    .wiremill("gregitas:morered_wire")
+    .wiremill("gregitas:projectred_transmission_red_alloy_wire")
     .itemInputs("gtceu:red_alloy_ingot")
     .circuit(5)
-    .itemOutputs("4x morered:red_alloy_wire")
+    .itemOutputs("4x projectred_transmission:red_alloy_wire")
     .duration(40)
     .EUt(ULV)
 
@@ -1546,16 +1267,6 @@ let gtceuAdd = (/** @type {Internal.RecipesEventJS} */ event) => {
     .itemOutputs("6x gtceu:potassium_carbonate_dust")
     .duration(40)
     .EUt(LV)
-
-  event.recipes.gtceu
-    .large_chemical_reactor("gregitas:co_mn_br_catalyst")
-    .inputFluids(Fluid.of("gcyr:cobalt_bromide", 1000))
-    .inputFluids(Fluid.of("gcyr:manganese_bromide", 1000))
-    .inputFluids(Fluid.of("gcyr:manganese_acetate", 1000))
-    .inputFluids(Fluid.of("gcyr:hydrobromic_acid", 1000))
-    .outputFluids(Fluid.of("gcyr:co_mn_br_catalyst", 4000))
-    .duration(100)
-    .EUt(HV)
 
   //stuff
 

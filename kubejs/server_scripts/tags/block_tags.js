@@ -253,4 +253,5 @@ const addBlockTags = (/** @type {TagEvent.Block} */ event) => {
       "thoriumreactors:reactor_controller", "thoriumreactors:reactor_rod_controller",
     ]
   )
+  event.add('create:chest_mounted_storage', /(tfc|afc):wood\/.*chest\//)
 }

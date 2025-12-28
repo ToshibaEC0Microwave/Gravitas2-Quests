@@ -632,4 +632,6 @@ let recipeRemoval = (/** @type {Internal.RecipesEventJS} */ event) => {
   event.remove({ id: "scguns:create/mechanical_crafting/prima_materia"})
   event.remove({ id: "scguns:anthralite/anthralite_knife_smithing"})
 
+  event.remove({ id: "projectred_transmission:red_alloy_wire"})
+  event.remove({ id: "gtceu:chemical_reactor/ultra_high_grade_hypogen_separation_agent"})
 }
