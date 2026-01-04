@@ -237,6 +237,11 @@ const chestReplacementMap = {
   "tfc:metal/ingot/wrought_iron": "gtceu:wrought_iron_ingot",
   "tfc:metal/sheet/silver": "gtceu:silver_plate",
   "tfc:metal/sheet/zinc": "gtceu:zinc_plate",
+  "gtceu:quarktech_chestplate": "gtceu:bronze_ingot",
+  "gtceu:quarktech_leggings"  : "gtceu:bronze_ingot",
+  "gtceu:quarktech_boots"  : "gtceu:bronze_ingot",
+  "gtceu:quarktech_helmet"  : "gtceu:bronze_ingot",
+  "gtceu:advanced_quarktech_chestplate"  : "gtceu:steel_plate",
 }
 
 let modifyAndRemoveChestLoot = (/** @type {Internal.LootModificationEventJS} */ event) => {
