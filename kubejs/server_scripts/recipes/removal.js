@@ -646,4 +646,13 @@ let recipeRemoval = (/** @type {Internal.RecipesEventJS} */ event) => {
 
   event.remove({ id: "projectred_transmission:red_alloy_wire"})
   event.remove({ id: "gtceu:chemical_reactor/ultra_high_grade_hypogen_separation_agent"})
+
+  //Coins
+  event.remove({ id: `/^createdeco:pressing\/coins\/.*_coin/`})
+  event.remove({ id: "workerstfc:anvil/coins1"})
+  event.remove({ id: "workerstfc:anvil/coins2"})
+  event.remove({ id: "workerstfc:anvil/coins3"})
+  event.remove({ id: "workerstfc:anvil/coins4"})
+  event.remove({ id: "tfc_ie_addon:welding/aluminum_double_ingot"})
+
 }

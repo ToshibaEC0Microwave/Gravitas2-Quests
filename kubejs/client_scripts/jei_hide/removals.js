@@ -185,6 +185,8 @@ let hideItems = (/** @type {Internal.HideJEIEventJS}*/ event) => {
     // Global remove + hides
     global.itemsToRemove.forEach(item => event.hide(item))
     global.fluidsWithBucketsToRemove.forEach(item => event.hide(item + "_bucket"))
+
+    event.hide('/^createdeco:.*_coin.*/')
 }
 
 
